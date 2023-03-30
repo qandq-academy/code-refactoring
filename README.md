@@ -1,46 +1,49 @@
-# Getting Started with Create React App
+# version 1
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Problem: Poor state management - Props are cloned multiple times
+solution: introduce a Context for holding data
 
-## Available Scripts
+# version 2
 
-In the project directory, you can run:
+Problem: Poor model/view separation  - any change on DataModel requires update on UI components
+solution: introduce a view model and serve from Data Context - apply OOP
 
-### `yarn start`
+# version 3
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Problem: Poor reuseability of UI components, loosely coupling
+solution: Higher order component for injecting value to Display components, business carried on WithDataCalculator
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# version 4
 
-### `yarn test`
+Problem: Poor encapsulation - unnecessary logic in Higher Order Component
+solution: introduce a new method in DataContextModel and use it
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+# version 5
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Problem: WithDataCalculator can consume data as it is intended for it
+solution: carry DataContext Consumer into HOC.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# version 6
+What we have achieved
+- data calculation business is carried on HOC and class model
+- UI components are reusable
+- straight to add new UI components that visualise some calculation out of data
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Problem: WithDataCalculator can only inject a data type of number - so hard to wrap a display a component taking a string
+Solution: make val type any...
 
-### `yarn eject`
+# version 7
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Problem: any ???? no good.
+solution: use generic type
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# version 8
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Problem: no open-closed principle in findValue of DataContextModel
+solution: let each component brings its own calculation
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# version 9
+WithDataCalculator takes its computation function as an optional argument 
+it is possible to embedd this function into ExtraInfo  - live demonstration?
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
